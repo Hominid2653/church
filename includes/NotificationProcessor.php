@@ -74,7 +74,7 @@ class NotificationProcessor {
             $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = SMTP_PORT;
             
-            $mail->setFrom(CHURCH_EMAIL, 'West-Side Church');
+            $mail->setFrom(CHURCH_EMAIL, 'Kabarak University');
             $mail->addAddress($notification['email']);
             $mail->Subject = "Church Notification: " . ucfirst($notification['type']);
             $mail->Body = $notification['content'];

@@ -42,11 +42,11 @@ try {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body>
+<body class="admin-page">
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>West-Side Church</h3>
+            <h3>Kabarak University</h3>
         </div>
         <div class="sidebar-menu">
             <a href="dashboard.php" class="active">
@@ -80,30 +80,30 @@ try {
             <div class="dashboard-menu">
                 <h3>Dashboard Overview</h3>
                 <div class="menu-grid">
-                    <div class="menu-item stat-card">
+                    <a href="register_member.php" class="menu-item stat-card">
                         <i class="fas fa-users"></i>
                         <h4>Total Members</h4>
                         <div class="stat-number"><?php echo $total_members; ?></div>
                         <p>Active members</p>
-                    </div>
-                    <div class="menu-item stat-card">
+                    </a>
+                    <a href="events.php" class="menu-item stat-card">
                         <i class="fas fa-calendar-alt"></i>
                         <h4>Upcoming Events</h4>
                         <div class="stat-number"><?php echo $upcoming_events; ?></div>
                         <p>Next 30 days</p>
-                    </div>
-                    <div class="menu-item stat-card">
+                    </a>
+                    <a href="sermons.php" class="menu-item stat-card">
                         <i class="fas fa-book-open"></i>
                         <h4>Today's sermons</h4>
                         <div class="stat-number"><?php echo $today_sermons; ?></div>
                         <p>Daily messages</p>
-                    </div>
-                    <div class="menu-item stat-card">
+                    </a>
+                    <a href="notifications.php" class="menu-item stat-card">
                         <i class="fas fa-bell"></i>
                         <h4>Notifications</h4>
                         <div class="stat-number"><?php echo $pending_notifications; ?></div>
                         <p>Pending alerts</p>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

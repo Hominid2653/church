@@ -41,3 +41,7 @@ CREATE TABLE notifications (
     error_message TEXT,
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
+
+-- Add new role enum value to users table
+ALTER TABLE users 
+MODIFY COLUMN role ENUM('admin', 'staff', 'member') NOT NULL DEFAULT 'member';

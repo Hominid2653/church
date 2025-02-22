@@ -73,7 +73,7 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daily Sermons - Church Management System</title>
+    <title>Daily Sermons - Kabarak University</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -82,7 +82,7 @@ try {
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>West-Side Church</h3>
+            <h3>Kabarak University</h3>
         </div>
         <div class="sidebar-menu">
             <a href="dashboard.php">

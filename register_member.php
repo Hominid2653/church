@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Check if user is logged in and is admin/staff
+if (!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], ['admin', 'staff'])) {
+    header('Location: login.php');
+    exit();
+}
+
 require_once 'config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         
         $stmt = $pdo->prepare("INSERT INTO users (username, password, member_id, role) 
-                              VALUES (:username, :password, :member_id, 'staff')");
+                              VALUES (:username, :password, :member_id, 'member')");
         
         $stmt->execute([
             ':username' => $_POST['username'],
@@ -41,16 +49,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register Member - West-Side Church</title>
+    <title>Register Member - Kabarak University</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="admin-page">
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>West-Side Church</h3>
+            <h3>Kabarak University</h3>
         </div>
         <div class="sidebar-menu">
             <a href="dashboard.php">
@@ -63,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <i class="fas fa-calendar-alt"></i> Events
             </a>
             <a href="sermons.php">
-                <i class="fas fa-book-open"></i> Daily sermons
+                <i class="fas fa-bible"></i> Daily Sermons
             </a>
             <a href="notifications.php">
                 <i class="fas fa-bell"></i> Notifications
@@ -90,66 +97,76 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
 
             <form method="POST" action="" class="registration-form">
-                <div class="form-section">
-                    <h3 class="form-section-title">Personal Information</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" name="first_name" placeholder="Enter first name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" name="last_name" placeholder="Enter last name" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" name="email" placeholder="Enter email address" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phone_number" placeholder="Enter phone number" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>WhatsApp Number</label>
-                            <input type="tel" name="whatsapp_number" placeholder="Enter WhatsApp number">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Location</label>
-                            <input type="text" name="location" placeholder="Enter location" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <h3 class="form-section-title">Account Information</h3>
+                <div class="form-grid">
                     <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name="username" placeholder="Choose a username" required>
+                        <label>
+                            <i class="fas fa-user"></i>
+                            First Name
+                        </label>
+                        <input type="text" name="first_name" required>
                     </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" name="password" placeholder="Enter password" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Confirm Password</label>
-                            <input type="password" name="confirm_password" placeholder="Confirm password" required>
-                        </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-user"></i>
+                            Last Name
+                        </label>
+                        <input type="text" name="last_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </label>
+                        <input type="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-phone"></i>
+                            Phone Number
+                        </label>
+                        <input type="tel" name="phone_number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-map-marker-alt"></i>
+                            Location
+                        </label>
+                        <input type="text" name="location" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-user-circle"></i>
+                            Username
+                        </label>
+                        <input type="text" name="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <input type="password" name="password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <input type="password" name="confirm_password" required>
                     </div>
                 </div>
-                
-                <button type="submit" class="btn-submit">Register Member</button>
+
+                <button type="submit" class="btn-register">
+                    <i class="fas fa-user-plus"></i>
+                    Register Member
+                </button>
             </form>
         </div>
     </div>
